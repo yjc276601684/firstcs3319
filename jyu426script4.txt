@@ -1,0 +1,20 @@
+USE jyu426assigndb;
+
+SELECT * FROM product;
+SELECT * FROM customer;
+SELECT * FROM agent;
+SELECT * FROM purchase;
+SELECT * FROM dealwith;
+
+CREATE VIEW shopping_info AS SELECT customer.firstName, customer.lastName, product.description, product.cost, SUM(purchase.numPurchased) AS quantity_purchased, SUM(product.cost * purchase.numPurchased) AS total_spend FROM (customer INNER JOIN purchase ON customer.customerID = purchase.customerID) INNER JOIN product ON product.productID = purchase.productID GROUP BY purchase.customerID, product.description;
+
+SELECT * FROM shopping_info;
+
+SELECT * FROM shopping_info WHERE total_spend > 100;
+
+DELETE FROM product WHERE productID = '77';
+
+SELECT * FROM product;
+
+DELETE FROM agent WHERE city = 'Springfield';
+--Delete cannot be done because the target agents has their customers; command "cascade" was not  used when creating the "dealwith" table;
