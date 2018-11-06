@@ -1,32 +1,32 @@
 USE jyu426assigndb;
 
---Query 1
+-- Query 1
 SELECT description FROM product;
---Query 2
+-- Query 2
 SELECT DISTINCT city FROM customer;
---Query 3
+-- Query 3
 SELECT * FROM agent ORDER BY city;
---Query 4
+-- Query 4
 SELECT firstName, lastName FROM customer WHERE city = 'Springfield';
---Query 5
+-- Query 5
 SELECT lastName FROM customer WHERE customerID IN(SELECT customerID FROM dealwith WHERE agentID = '11');
---Query 6
+-- Query 6
 SELECT description FROM product WHERE description LIKE "%Pad%" OR description LIKE "%pad%";
---Query 7
+-- Query 7
 SELECT firstName, lastName, numPurchased FROM customer INNER JOIN purchase ON customer.customerID = purchase.customerID;
---Query 8
+-- Query 8
 SELECT SUM(numPurchased) AS "Homer's Total Purchases" FROM purchase WHERE customerID IN(SELECT customerID FROM customer WHERE firstName = 'Homer');
---Query 9
+-- Query 9
 SELECT firstName, lastName, SUM(numPurchased) AS 'Total Purchase'FROM customer INNER JOIN purchase ON customer.customerID = purchase.customerID GROUP BY customer.customerID;
---Query 10
+-- Query 10
 SELECT DISTINCT description, quantity FROM product LEFT JOIN purchase ON product.productID = purchase.productID WHERE purchase.productID IS NULL;
---Query 11
+-- Query 11
 SELECT DISTINCT description, quantity FROM product WHERE productID NOT IN(SELECT productID FROM purchase INNER JOIN customer ON purchase.customerID = customer.customerID WHERE customer.customerID IN(SELECT customerID FROM customer WHERE firstName = 'Fred' && lastName = 'Flintstone'));
---Query 12
+-- Query 12
 SELECT DISTINCT agent.firstName, agent.lastName, customer.firstName, customer.lastName FROM (dealwith INNER JOIN agent ON dealwith.agentID = agent.agentID) INNER JOIN customer ON agent.city = customer.city;
---Query 13
+-- Query 13
 SELECT SUM(numPurchased) AS 'Knee Pads Sold' FROM purchase WHERE productID = '78';
---Query 14
+-- Query 14
 SELECT DISTINCT description FROM product INNER JOIN purchase ON product.productID = purchase.productID WHERE (SELECT COUNT(*) FROM purchase WHERE product.productID = purchase.productID)>3;
---Query 15
+-- Query 15
 SELECT firstName, lastName FROM (agent INNER JOIN dealwith ON agent.agentID = dealwith.agentID) INNER JOIN purchase ON dealwith.customerID = purchase.customerID WHERE purchase.productID = '78';

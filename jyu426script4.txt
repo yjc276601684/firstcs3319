@@ -17,4 +17,4 @@ DELETE FROM product WHERE productID = '77';
 SELECT * FROM product;
 
 DELETE FROM agent WHERE city = 'Springfield';
---Delete cannot be done because the target agents has their customers; command "cascade" was not  used when creating the "dealwith" table;
+-- Delete cannot be done because the target agents has their customers; command "cascade" was not  used when creating the "dealwith" table;

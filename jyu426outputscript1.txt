@@ -1,0 +1,71 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+mysql
+performance_schema
+--------------
+DROP DATABASE IF EXISTS jyu426assigndb
+--------------
+
+--------------
+CREATE DATABASE jyu426assigndb
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON jyu426assign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE product (productID CHAR(2) NOT NULL, description VARCHAR(20), cost DOUBLE, quantity INT, PRIMARY KEY(productID))
+--------------
+
+--------------
+CREATE TABLE agent (agentID CHAR(2) NOT NULL, firstName VARCHAR(30), lastName VARCHAR(30), city VARCHAR(15), commision INT, PRIMARY KEY(agentID))
+--------------
+
+--------------
+CREATE TABLE customer (customerID CHAR(2) NOT NULL, firstName VARCHAR(30), lastName VARCHAR(30), city VARCHAR(15), phoneNum VARCHAR(15), PRIMARY KEY(customerID))
+--------------
+
+--------------
+CREATE TABLE purchase (customerID CHAR(2) NOT NULL, productID CHAR(2) NOT NULL, numPurchased INT, FOREIGN KEY (customerID) REFERENCES customer(customerID) ON DELETE CASCADE, FOREIGN KEY (productID) REFERENCES product(productID) ON DELETE CASCADE)
+--------------
+
+--------------
+CREATE TABLE dealwith (agentID CHAR(2) NOT NULL, customerID CHAR(2) NOT NULL, FOREIGN KEY (agentID) REFERENCES agent(agentID), FOREIGN KEY (customerID) REFERENCES customer(customerID) ON DELETE CASCADE)
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_jyu426assigndb
+agent
+customer
+dealwith
+product
+purchase
